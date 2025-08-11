@@ -3,4 +3,19 @@
 @theme {
 	--breakpoint-lg: 668px;
 	--breakpoint-xl: 1280px;
+
+	--color-background: #262323;
+	--color-surface: #2C2C2C;
+	--color-primary: #7C3AED;
+	--color-primary-light: #A78BFA;
+	--color-secondary: #10B981;
+	--color-text-primary: #E0E0E0;
+	--color-text-secondary: #A0A0A0;
+	--color-error: #EF4444;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-text-primary;
+  }
 }
