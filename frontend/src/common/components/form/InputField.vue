@@ -11,7 +11,7 @@ withDefaults(
   defineProps<{
     name: string;
     label: string;
-    type: string;
+    type?: string;
     rules?: string;
     placeholder?: string;
     classForError?: string;

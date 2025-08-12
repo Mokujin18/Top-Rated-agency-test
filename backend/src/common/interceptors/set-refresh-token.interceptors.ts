@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ENV } from '@/common/constants/env.constants';
 
 @Injectable()
 export class SetRefreshTokenInterceptor implements NestInterceptor {
@@ -20,7 +21,8 @@ export class SetRefreshTokenInterceptor implements NestInterceptor {
 
           const defaultOptions = {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure: ENV.NODE_ENV === 'production',
+            sameSite: 'strict',
             maxAge: 30 * 24 * 60 * 60 * 1000,
             path: '/',
           };

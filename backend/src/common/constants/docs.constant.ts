@@ -40,4 +40,27 @@ export const API_OPERATION = {
       description: 'Logout',
     },
   },
+
+  PRODUCT: {
+    CREATE: {
+      summary: 'Create product',
+      description: 'Create product',
+    },
+    FIND_MANY: {
+      summary: 'Find many products',
+      description: 'Find many products',
+    },
+    FIND_ONE: {
+      summary: 'Find one product',
+      description: 'Find one product',
+    },
+    UPDATE: {
+      summary: 'Update product',
+      description: 'Update product',
+    },
+    REMOVE: {
+      summary: 'Remove product',
+      description: 'Remove product',
+    },
+  },
 };

@@ -55,6 +55,28 @@ const routes: RouteRecordRaw[] = [
       redirectToPublicPage(next);
     },
   },
+  {
+    path: ROUTES.PRODUCTS,
+    name: 'products',
+    component: () =>
+      import(
+        /* webpackChunkName: "Products" */ '../../modules/products/pages/product/ProcutPage.vue'
+      ),
+    beforeEnter: (_, __, next) => {
+      redirectToPublicPage(next);
+    },
+  },
+  {
+    path: ROUTES.DASHBOARD,
+    name: 'dashboard',
+    component: () =>
+      import(
+        /* webpackChunkName: "Products" */ '../../modules/products/pages/dashbord/DashbordPage.vue'
+      ),
+    beforeEnter: (_, __, next) => {
+      redirectToPublicPage(next);
+    },
+  },
 ];
 
 const router = createRouter({
