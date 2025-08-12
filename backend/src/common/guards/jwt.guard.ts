@@ -22,12 +22,15 @@ export class JwtGuard implements CanActivate {
     const request: RequestWithUser = context.switchToHttp().getRequest();
     const tokenType = this.getTokenTypeFromContext(context);
 
-    const token = this.getToken(context);
+    const token =
+      tokenType === TokenType.REFRESH
+        ? this.getTokenFromCookie(context)
+        : this.getToken(context);
 
     const { userId } =
       tokenType === TokenType.ACCESS
         ? await this.jwtUtil.validateToken(token, TokenType.ACCESS)
-        : await this.jwtUtil.decodeToken(token, TokenType.ACCESS);
+        : await this.jwtUtil.validateToken(token, TokenType.REFRESH);
 
     request.user = await this.userService.findOne(userId);
     return true;

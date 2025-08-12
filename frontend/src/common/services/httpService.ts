@@ -54,6 +54,10 @@ export class HttpService {
     return apiClient.delete(url, config);
   }
 
+  patch<D = any>(url: string, data?: D, config?: AxiosRequestConfig<D>) {
+    return apiClient.patch(url, data, config);
+  }
+
   static getAuthBearerToken() {
     const data = localStorage.getItem(LOCAL_STORAGE_KEYS.USER);
     const parsedData = JSON.parse(data || '{}');
@@ -66,9 +70,9 @@ export class HttpService {
     return token ? `Bearer ${token}` : null;
   }
 
-  static setAuthBearerToken({ accessToken, refreshToken }: Tokens) {
+  static setAuthBearerToken({ accessToken }: Tokens) {
     const { setTokens } = useUserStore();
-    setTokens({ accessToken, refreshToken });
+    setTokens({ accessToken });
 
     apiClient.defaults.headers.Authorization = `Bearer ${accessToken}`;
   }
@@ -79,7 +83,7 @@ export class HttpService {
       ?.refreshToken;
     const { logout } = useUserStore();
 
-    const res = await fetch(`${env.API_URL}/auth/refresh`, {
+    const res = await fetch(`${env.API_URL}/api/auth/refresh`, {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
@@ -102,7 +106,7 @@ export class HttpService {
       throw new Error('Помилка рефрешу токену');
     }
 
-    HttpService.setAuthBearerToken({ accessToken: newAccessToken, refreshToken: newRefreshToken });
+    HttpService.setAuthBearerToken({ accessToken: newAccessToken });
 
     return data;
   }

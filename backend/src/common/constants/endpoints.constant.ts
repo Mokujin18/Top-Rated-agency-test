@@ -16,4 +16,13 @@ export const ENDPOINTS = {
     REFRESH: '/refresh',
     LOGOUT: '/logout',
   },
+
+  PRODUCT: {
+    BASE: '/product',
+    CREATE: '/',
+    FIND_MANY: '/',
+    FIND_ONE: '/:id',
+    UPDATE: '/:id',
+    REMOVE: '/:id',
+  },
 } as const;

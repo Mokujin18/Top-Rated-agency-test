@@ -11,7 +11,7 @@ import { ENV } from '@/common/constants/env.constants';
 export class JwtUtil {
   private readonly accessSecret: string;
   private readonly refreshSecret: string;
-  private readonly accessExpiresIn = '15m';
+  private readonly accessExpiresIn = '1d';
   private readonly refreshExpiresIn = '7d';
   private readonly config: TokenConfig;
 
@@ -57,23 +57,10 @@ export class JwtUtil {
     try {
       const config = this.config[tokenType];
       return this.jwtService.verify(token, { secret: config.secret });
-    } catch {
-      throw new UnauthorizedException('Access token is expired or invalid');
-    }
-  }
-
-  async decodeToken(
-    token: string,
-    tokenType: TokenType,
-  ): Promise<TokenPayload> {
-    try {
-      const config = this.config[tokenType];
-      return this.jwtService.verify(token, {
-        secret: config.secret,
-        ignoreExpiration: true,
-      });
-    } catch {
-      throw new UnauthorizedException('Access token is expired or invalid');
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : 'Invalid or expired token';
+      throw new UnauthorizedException(message);
     }
   }
 }
