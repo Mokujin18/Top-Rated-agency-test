@@ -2,7 +2,7 @@
 import { getErrorMessage } from '../../../utils/errors.ts';
 
 defineProps<{
-  error: Error | unknown;
+  error: Error | unknown | null;
 }>();
 </script>
 

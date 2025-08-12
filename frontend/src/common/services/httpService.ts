@@ -2,10 +2,10 @@ import { env } from '../constants/env.ts';
 import axios, { type AxiosRequestConfig } from 'axios';
 import { LOCAL_STORAGE_KEYS } from '@common/constants';
 import { useUserStore } from '@common/stores/useUserStore.ts';
-import type { Tokens } from "@common/types/auth.ts";
+import type { Tokens } from '@common/types/auth.ts';
 
 export const apiClient = axios.create({
-  baseURL: `${env.API_URL}`,
+  baseURL: `${env.API_URL}/api`,
   headers: {
     'Content-Type': 'application/json',
   },

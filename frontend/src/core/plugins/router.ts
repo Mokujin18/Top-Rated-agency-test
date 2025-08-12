@@ -10,7 +10,7 @@ export const redirectToPublicPage: any = (next: NavigationGuardNext) => {
   const data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.USER) || '{}');
   const { tokens } = data;
   if (!tokens?.accessToken) {
-    next('/login');
+    next(ROUTES.LOGIN);
   } else {
     next();
   }
@@ -20,7 +20,7 @@ export const redirectToPrivatePage: any = (next: NavigationGuardNext) => {
   const data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.USER) || '{}');
   const { tokens } = data;
   if (tokens?.accessToken) {
-    next('/');
+    next(ROUTES.HOME);
   } else {
     next();
   }
@@ -51,6 +51,9 @@ const routes: RouteRecordRaw[] = [
     path: ROUTES.HOME,
     name: 'home',
     component: () => import(/* webpackChunkName: "Home" */ '../../modules/home/HomePage.vue'),
+    beforeEnter: (_, __, next) => {
+      redirectToPublicPage(next);
+    },
   },
 ];
 

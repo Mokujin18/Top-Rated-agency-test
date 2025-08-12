@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from "@core/plugins/router.ts";
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import { createPinia } from "pinia";
+import '@core/plugins/vee-validate.ts';
 
 const app = createApp(App)
 
